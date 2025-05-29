@@ -9,5 +9,5 @@ public class SnakeGame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-}
+} ab
  
