@@ -25,15 +25,89 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         this.setFocusable(true);
         this.addKeyListener(this);
         loadImage();
-    }
+        snake = new Snake();
 
+        wallBlocks = new ArrayList<>(); 
+
+        int columns = width / boxSize;
+        int rows = height / boxSize;
+
+       //  Top wall 
+       for (int y = 0; y <= 1; y++) {
+       for (int x = 0; x < columns; x++) {
+        wallBlocks.add(new Point(x, y));
+          }
+        } 
+ 
+       //  Bottom wall
+       for (int y = rows - 2; y < rows; y++) {
+       for (int x = 0; x < columns; x++) {
+       wallBlocks.add(new Point(x, y));
+        }
+      } 
+
+     //  Left wall
+     for (int x = 0; x <= 1; x++) {
+     for (int y = 0; y < rows; y++) {
+        wallBlocks.add(new Point(x, y));
+         } 
+     }
+
+     //Right wall
+     for (int x = columns - 2; x < columns; x++) {
+     for (int y = 0; y < rows; y++) {
+        wallBlocks.add(new Point(x, y));
+         }
+       }
+
+        food = new Food(snake.getBody()); 
+        sound = new SoundPlayer();
+        sound.playGameStartSound(); 
+        timer = new Timer(130, this);
+        timer.start();
+   
+    }
+   
     private void loadImage() {
-        try {
-            backgroundImage = ImageIO.read(new File("backround.jpg"));
-        } catch (IOException e) {
-            System.out.println("Background not loaded.");
+    try {
+        backgroundImage = ImageIO.read(new File("backround.jpg"));
+    } catch (IOException e) {
+        System.out.println("Background not loaded.");
+    }
+ }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (running) {
+            snake.move();
+
+          if (snake.getBody().get(0).equals(food.getPosition())) {
+              snake.grow();
+              food.generateNewPosition(snake.getBody()); // Fixed
+              sound.playEatSound();
+            }
+
+            Point head = snake.getBody().get(0);
+            // Check for wall collision
+            if (wallBlocks.contains(head)) {
+            running = false;
+            gameOver = true;
+            sound.stopSound();
+            }
+
+
+            for (int i = 1; i < snake.getBody().size(); i++) {
+                if (head.equals(snake.getBody().get(i))) {
+                    running = false;
+                    gameOver = true;
+                    sound.stopSound();
+                    break;
+                }
+            }
+            repaint();
         }
     }
+
 
     @Override
     public void paintComponent(Graphics g) {

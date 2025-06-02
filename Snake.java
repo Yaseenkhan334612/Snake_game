@@ -47,3 +47,4 @@ public class Snake {
         return direction;
     }
 }
+}
