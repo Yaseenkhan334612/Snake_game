@@ -46,5 +46,6 @@ public class Snake {
     public String getDirection() {
         return direction;
     }
+    
 }
 }
