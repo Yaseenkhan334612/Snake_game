@@ -108,14 +108,56 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         }
     }
 
-
-    @Override
+@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, width, height, this);
         }
-        g.fillRect(0, 0, width, height);
+    
+        // Draw Message Behind the Snake
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        g.drawString("A&Y TECH GAME", 160, height / 2);        
+
+        // Yellow Food
+        g.setColor(Color.YELLOW);
+        Point foodPos = food.getPosition();
+        g.fillOval(foodPos.x * boxSize, foodPos.y * boxSize, boxSize, boxSize);
+
+        // Snake
+        for (int i = 0; i < snake.getBody().size(); i++) {
+            Point p = snake.getBody().get(i);
+            if (i == 0) {
+                g.setColor(Color.RED); // Head
+            } else {
+                g.setColor(Color.RED); // Body
+            }
+            g.fillRoundRect(p.x * boxSize, p.y * boxSize, boxSize, boxSize, 10, 10);
+        }
+
+        // Snake Eyes
+        if (!snake.getBody().isEmpty()) {
+            Point head = snake.getBody().get(0);
+            int x = head.x * boxSize;
+            int y = head.y * boxSize;
+            g.setColor(Color.white);
+            g.fillOval(x + 4, y + 4, 5, 5); // Eyes Of Left 
+            g.fillOval(x + boxSize - 9, y + 4, 5, 5); // Eyes Of Right
+        }
+
+        // Score
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        g.drawString("Score: " + (snake.getBody().size() - 1), 10, 20);
+        
+
+        if (gameOver) {
+            g.setColor(Color.white);
+            g.setFont(new Font("Times New Roman", Font.BOLD, 30));
+            g.drawString("Game Over!Press R to Restart", 110, height / 2+50);
+        }
     }
 
         @Override
