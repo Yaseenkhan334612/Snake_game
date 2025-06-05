@@ -7,7 +7,7 @@ public class ScoredatabaseManager {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/snake_game", "root", "your_password");
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS highscore (id INT PRIMARY KEY AUTO_INCREMENT, score INT)");
+            stmt.executeUpdate("CREATE TABLE IF NOT EXISTs highscore (id INT PRIMARY KEY AUTO_INCREMENT, score INT)");
         } catch (Exception e) {
             e.printStackTrace();
         }
