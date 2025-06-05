@@ -118,8 +118,35 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         g.fillRect(0, 0, width, height);
     }
 
-    @Override public void actionPerformed(ActionEvent e) {}
-    @Override public void keyPressed(KeyEvent e) {}
-    @Override public void keyReleased(KeyEvent e) {}
-    @Override public void keyTyped(KeyEvent e) {}
+        @Override
+    public void keyPressed(KeyEvent e) {
+        if (!running && gameOver && e.getKeyCode() == KeyEvent.VK_R) {
+            snake = new Snake();
+            food = new Food(snake.getBody()); //Fixed to pass snake body
+            running = true;
+            gameOver = false;
+            sound.playGameStartSound(); //  Play music again
+
+        }
+
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                if (!snake.getDirection().equals("DOWN")) snake.setDirection("UP");
+                break;
+            case KeyEvent.VK_DOWN:
+                if (!snake.getDirection().equals("UP")) snake.setDirection("DOWN");
+                break;
+            case KeyEvent.VK_LEFT:
+                if (!snake.getDirection().equals("RIGHT")) snake.setDirection("LEFT");
+                break;
+            case KeyEvent.VK_RIGHT:
+                if (!snake.getDirection().equals("LEFT")) snake.setDirection("RIGHT");
+                break;
+        }
+    }
+
+    @Override 
+    public void keyReleased(KeyEvent e) {}
+    @Override 
+    public void keyTyped(KeyEvent e) {}
 }
