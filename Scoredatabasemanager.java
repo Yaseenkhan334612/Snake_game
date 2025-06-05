@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class ScoreDatabaseManager {
+public class ScoredatabaseManager {
     private Connection conn;
 
     public ScoreDatabaseManager() {
