@@ -5,7 +5,7 @@ public class ScoredatabaseManager {
 
     public ScoreDatabaseManager() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/snake_game", "root", "12345678");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/snake_game", "root", "f24cs1817");
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTs highscore (id INT PRIMARY KEY AUTO_INCREMENT, score INT)");
         } catch (Exception e) {
@@ -16,7 +16,7 @@ public class ScoredatabaseManager {
     public void saveScore(int score) {
         try {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO highscore(score) VALUES(?)");
-            ps.setnt(1, score);
+            ps.setInt(1, score);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
