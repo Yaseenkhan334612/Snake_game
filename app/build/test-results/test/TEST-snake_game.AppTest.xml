@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="snake_game.AppTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-28T19:44:57" hostname="TOSHIBASATELLIT" time="0.049">
+  <properties/>
+  <testcase name="appHasAGreeting()" classname="snake_game.AppTest" time="0.049"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

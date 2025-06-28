@@ -3,6 +3,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     private Timer timer;
     private SoundPlayer sound;
     private Image backgroundImage;
+    private ScoreDatabaseManager db;
     public static ArrayList<Point> wallBlocks;
 
     public GamePanel() {
@@ -26,7 +28,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         this.addKeyListener(this);
         loadImage();
         snake = new Snake();
-
+          db = new ScoreDatabaseManager();
         wallBlocks = new ArrayList<>(); 
 
         int columns = width / boxSize;
@@ -62,6 +64,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
         food = new Food(snake.getBody()); 
         sound = new SoundPlayer();
+    
+
         sound.playGameStartSound(); 
         timer = new Timer(130, this);
         timer.start();
@@ -93,9 +97,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
             running = false;
             gameOver = true;
             sound.stopSound();
+            db.saveScore(snake.getBody().size() - 1);
+
             }
 
-
+           
             for (int i = 1; i < snake.getBody().size(); i++) {
                 if (head.equals(snake.getBody().get(i))) {
                     running = false;
@@ -152,6 +158,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         g.setFont(new Font("Times New Roman", Font.BOLD, 20));
         g.drawString("Score: " + (snake.getBody().size() - 1), 10, 20);
         
+        ScoreDatabaseManager db = new ScoreDatabaseManager();
+        int high = db.getHighScore();
+        g.drawString("High Score: " + high, 10, 40);
 
         if (gameOver) {
             g.setColor(Color.white);
