@@ -74,7 +74,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
    
     private void loadImage() {
     try {
-        backgroundImage = ImageIO.read(new File("backround.jpg"));
+        backgroundImage = ImageIO.read(new File("src/main/resourses/backround.jpg"));
     } catch (IOException e) {
         System.out.println("Background not loaded.");
     }
