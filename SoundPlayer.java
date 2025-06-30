@@ -7,7 +7,7 @@ public class SoundPlayer {
     public void playEatSound() {
         try {
             if (clip == null || !clip.isRunning()) {
-                AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("eating_sound.wav"));
+                AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("src/main/resources/eating_sound.wav"));
                 clip = AudioSystem.getClip();
                 clip.open(audioIn);
                 clip.start();
@@ -26,7 +26,7 @@ public class SoundPlayer {
 
     public void playGameStartSound() {
         try {
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("mgs__mp.wav"));
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("src/main/resources/mgs__mp.wav"));
             clip = AudioSystem.getClip();
             clip.open(audioIn);
             clip.start();
