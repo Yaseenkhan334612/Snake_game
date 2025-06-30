@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         this.addKeyListener(this);
         loadImage();
         snake = new Snake();
-          db = new ScoreDatabaseManager();
+        db = new ScoreDatabaseManager();
         wallBlocks = new ArrayList<>(); 
 
         int columns = width / boxSize;
@@ -160,7 +160,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         
         ScoreDatabaseManager db = new ScoreDatabaseManager();
         int high = db.getHighScore();
-        g.drawString("High Score: " + high, 10, 40);
+        g.drawString("High Score: " + high, 470,  20);
 
         if (gameOver) {
             g.setColor(Color.white);
